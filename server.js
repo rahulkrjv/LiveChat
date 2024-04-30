@@ -15,7 +15,7 @@ const {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-const botName = 'ChatCord Bot';
+const botName = 'LiveChat';
 
 io.on('connection', (socket) => {
   socket.on('joinRoom', ({ username, room }) => {
@@ -26,7 +26,7 @@ io.on('connection', (socket) => {
     socket.broadcast
       .to(user?.room)
       .emit('message', formatMessage(botName, `${user.username} joined`));
-    socket.emit('message', formatMessage(botName, 'Welcome to the ChatCord'));
+    socket.emit('message', formatMessage(botName, 'Welcome to the LiveChat'));
 
     // Sent the user list in the frontend
     io.to(user?.room).emit('userList', {
@@ -50,7 +50,7 @@ io.on('connection', (socket) => {
     });
     io.to(user?.room).emit(
       'message',
-      formatMessage(botName, `${user?.username} has leave from the ChatCord`)
+      formatMessage(botName, `${user?.username} has leave from the LiveChat`)
     );
   });
 });
